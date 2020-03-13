@@ -2,6 +2,7 @@
 const path = require('path');
 const chalk = require('chalk');
 const figlet = require('figlet');
+const ora = require('ora');
 
 const inquirer = require('./lib/inquirer');
 const download = require('./lib/download');
