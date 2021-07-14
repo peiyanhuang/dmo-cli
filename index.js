@@ -10,7 +10,7 @@ const render = require('./lib/render');
 
 console.log(
   chalk.yellow(
-    figlet.textSync('Ginit', { horizontalLayout: 'full' })
+    figlet.textSync('Dinit', { horizontalLayout: 'full' })
   )
 );
 
@@ -21,18 +21,22 @@ const run = async () => {
   // 临时目录
   const destination = path.resolve(__dirname, './tel');
   download(destination, () => {
-    console.log('render template');
-    const spinner = ora('waiting...');
+    const spinner = ora('render template waiting...');
     // 动态渲染模板
     render(credentials, destination).then(val => {
+      console.log(chalk.green('render success!'));
       spinner.stop();
 
       const startCmd = 'npm start'
       console.log(
         chalk.white('please run'),
-        chalk.bgBlue(`cd ${projectName} && npm i && ${startCmd}`),
+        chalk.black(`cd ${credentials.projectName} && npm i && ${startCmd}`),
         chalk.white('to start it'));
     }).catch(e => {
+      console.log(
+        chalk.red('fail:'),
+        chalk.red(e)
+      );
       spinner.stop();
     });
   });
